@@ -1,0 +1,23 @@
+{
+  "name": "daily-reser-app-2",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@expo/ngrok": "^4.1.0",
+    "expo": "~54.0.0",
+    "jimp": "^1.6.1",
+    "react": "^19.1.0",
+    "react-native": "0.81.5"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
+  }
+}
