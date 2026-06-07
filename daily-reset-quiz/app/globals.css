@@ -1,0 +1,430 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+}
+
+html {
+  background-color: #FAF7F2;
+}
+
+body {
+  font-family: var(--font-inter), Inter, sans-serif;
+  background-color: #FAF7F2;
+}
+
+.tap-target {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* EntryScreen */
+.entry-screen {
+  height: 100vh;
+  background-color: #FAF7F2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 32px 162px 32px;
+  box-sizing: border-box;
+}
+
+.entry-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.entry-logo {
+  width: 432px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.entry-divider {
+  width: 40px;
+  height: 1px;
+  background-color: #C9A84C;
+  margin: -34px auto 0 auto;
+  border: none;
+}
+
+.entry-middle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 194px;
+}
+
+.entry-headline {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1A1A1A;
+  text-align: center;
+  margin: 37px 0 0 0;
+}
+
+.entry-accent {
+  width: 24px;
+  height: 1px;
+  background-color: #C9A84C;
+  margin: 20px auto 0 auto;
+  border: none;
+}
+
+.entry-subtitle {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #6B6B6B;
+  text-align: center;
+  line-height: 1.6;
+  margin: 14px auto 0 auto;
+}
+
+.entry-subtitle-2 {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #8A8A8A;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.entry-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.entry-cta {
+  font-family: var(--font-inter), Inter, sans-serif;
+  background-color: #C9A84C;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 18px 32px;
+  border-radius: 100px;
+  border: none;
+  width: 100%;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
+/* QuestionScreen */
+.progress-fill {
+  height: 100%;
+  background-color: #C9A84C;
+  border-radius: 9999px;
+  transition: width 0.5s;
+  width: 0%;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TransitionScreen
+   ═══════════════════════════════════════════════════════════ */
+
+.transition-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:
+    env(safe-area-inset-top, 0px)
+    32px
+    env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+}
+
+/* Cinematic fade-out before result opens — 500 ms as specified */
+.transition-screen.is-fading-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* ── Content column ── */
+.transition-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Orb wrapper
+   CSS Grid stacks every child in the same cell, all centered.
+   No absolute positioning needed for the sphere → keyframes
+   only need scale(), which is pure Composite (no Paint).       ── */
+.orb-wrapper {
+  width: 196px;
+  height: 196px;
+  margin-bottom: 48px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.orb-ring,
+.orb-aura,
+.orb-reveal-glow,
+.orb-sphere,
+.orb-particles {
+  grid-area: 1 / 1;
+}
+
+/* ── Rings: slow rotation, different speeds & directions ── */
+.orb-ring {
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.orb-ring--outer {
+  width: 196px;
+  height: 196px;
+  /* Opacity animated in ring-breathe-outer (0.35 → 1.0).
+     Border at full opacity so the keyframe controls total visibility. */
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  will-change: transform, opacity;
+  animation:
+    ring-rotate-cw      65s linear                         infinite,
+    ring-breathe-outer  4.8s cubic-bezier(0.37, 0, 0.63, 1) infinite 0.6s;
+}
+
+.orb-ring--inner {
+  width: 144px;
+  height: 144px;
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  animation:
+    ring-rotate-ccw     95s linear                         infinite,
+    ring-breathe-inner  4.5s cubic-bezier(0.37, 0, 0.63, 1) infinite 0.3s;
+}
+
+/* ── Aura: glow blooms in sync with sphere ── */
+.orb-aura {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.26) 0%, transparent 70%);
+  will-change: transform, opacity;
+  animation: aura-breathe 4.5s ease-in-out infinite;
+}
+
+/* ── Reveal glow: separate layer that peaks during revelation ── */
+.orb-reveal-glow {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.45) 0%, transparent 68%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.transition-screen.is-revealing .orb-reveal-glow {
+  animation: reveal-glow 1.2s ease-out forwards;
+}
+
+/* ── Sphere: breathes 1 → 1.08 with organic pauses.
+   Opacity 0.88 → 1 makes the box-shadow glow rise and fall with the body. ── */
+.orb-sphere {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    #FBF0C2 0%,
+    #D9AE48 42%,
+    #A07820 75%,
+    #6B4F0A 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 190, 0.5),
+    0 0 0 1px rgba(255, 210, 80, 0.10),
+    0 0 18px rgba(201, 168, 76, 0.55),
+    0 0 48px rgba(201, 168, 76, 0.18);
+  will-change: transform, opacity;
+  animation: orb-breathe 4.5s ease-in-out infinite;
+}
+
+/* ── Orb particles (close to sphere) ── */
+.orb-particles {
+  width: 196px;
+  height: 196px;
+  position: relative;
+  pointer-events: none;
+}
+
+.orb-particle {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 50%;
+  background: #C9A84C;
+  will-change: transform, opacity;
+}
+
+.orb-particle:nth-child(1) { top:  4px; left: 50%;   animation: particle-drift 8s ease-in-out infinite 0.0s; }
+.orb-particle:nth-child(2) { top: 16%;  right:  6px; animation: particle-drift 8s ease-in-out infinite 1.3s; }
+.orb-particle:nth-child(3) { bottom: 8px; right: 22%; animation: particle-drift 8s ease-in-out infinite 2.6s; }
+.orb-particle:nth-child(4) { bottom: 6px; left:  22%; animation: particle-drift 8s ease-in-out infinite 3.9s; }
+.orb-particle:nth-child(5) { top: 16%;  left:  6px;  animation: particle-drift 8s ease-in-out infinite 5.2s; }
+.orb-particle:nth-child(6) { top: 50%;  right:  4px; animation: particle-drift 8s ease-in-out infinite 6.5s; }
+
+/* ── Background dust particles (full screen) ── */
+.transition-bg-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.transition-bg-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #C9A84C;
+  will-change: opacity, transform;
+}
+
+.transition-bg-particle:nth-child(1)  { top: 11%; left:  7%;  animation: bg-drift 12s ease-in-out infinite 0.0s; }
+.transition-bg-particle:nth-child(2)  { top: 22%; left: 80%;  animation: bg-drift 14s ease-in-out infinite 1.6s; }
+.transition-bg-particle:nth-child(3)  { top: 58%; left: 14%;  animation: bg-drift 11s ease-in-out infinite 3.2s; }
+.transition-bg-particle:nth-child(4)  { top: 76%; left: 85%;  animation: bg-drift 10s ease-in-out infinite 4.8s; }
+.transition-bg-particle:nth-child(5)  { top: 38%; left: 93%;  animation: bg-drift 15s ease-in-out infinite 0.9s; }
+.transition-bg-particle:nth-child(6)  { top: 87%; left: 44%;  animation: bg-drift 12s ease-in-out infinite 2.4s; }
+.transition-bg-particle:nth-child(7)  { top:  7%; left: 56%;  animation: bg-drift 13s ease-in-out infinite 5.2s; }
+.transition-bg-particle:nth-child(8)  { top: 48%; left:  4%;  animation: bg-drift 11s ease-in-out infinite 1.3s; }
+.transition-bg-particle:nth-child(9)  { top: 92%; left: 22%;  animation: bg-drift 10s ease-in-out infinite 4.0s; }
+.transition-bg-particle:nth-child(10) { top: 17%; left: 37%;  animation: bg-drift 16s ease-in-out infinite 6.5s; }
+
+/* ── Text container: fixed height so phrase changes never shift the orb ── */
+.transition-phrase-container {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Base: hidden, positioned 4px below centre, NO transition.
+   No transition here is intentional — after a phrase fades out
+   the element jumps instantly back to the "ready to enter" position
+   (translateY 4px) so the next fade-in starts from the right spot. ── */
+.transition-phrase {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-style: italic;
+  font-size: 21px;
+  color: #F6F1E8;
+  text-align: center;
+  max-width: 300px;
+  line-height: 1.65;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+/* ── Exiting: drifts 4px upward while fading out ── */
+.transition-phrase.is-exiting {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Visible: rises from 4px below to centre while fading in ── */
+.transition-phrase.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Keyframes
+   ═══════════════════════════════════════════════════════════ */
+
+/* Sphere: scale 1 → 1.08 with organic inhale / hold / exhale / hold pauses.
+   Opacity 0.88 → 1 carries the box-shadow glow along with the body — the
+   entire sphere (surface + halo) brightens on inhale and softens on exhale.
+   Effect is ~12 % brightness variation: perceptible but never distracting. */
+@keyframes orb-breathe {
+  0%   { transform: scale(1);    opacity: 0.88; }
+  38%  { transform: scale(1.08); opacity: 1; }
+  50%  { transform: scale(1.08); opacity: 1; }
+  88%  { transform: scale(1);    opacity: 0.88; }
+  100% { transform: scale(1);    opacity: 0.88; }
+}
+
+/* Aura mirrors sphere exactly but blooms wider (1.26×) so the glow
+   visibly intensifies as the sphere inhales and softens as it exhales. */
+@keyframes aura-breathe {
+  0%   { transform: scale(1);    opacity: 0.62; }
+  38%  { transform: scale(1.26); opacity: 1; }
+  50%  { transform: scale(1.26); opacity: 1; }
+  88%  { transform: scale(1);    opacity: 0.62; }
+  100% { transform: scale(1);    opacity: 0.62; }
+}
+
+/* Revelation peak: aura expands to maximum before screen fades */
+@keyframes reveal-glow {
+  0%   { transform: scale(1);    opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: scale(1.55); opacity: 0.85; }
+}
+
+/* Rings: rotate: and scale: are CSS Individual Transform properties.
+   Animating them in separate @keyframes is valid — they target different
+   CSS properties and compose automatically. No transform conflict. */
+@keyframes ring-rotate-cw {
+  from { rotate: 0deg; }
+  to   { rotate: 360deg; }
+}
+
+@keyframes ring-rotate-ccw {
+  from { rotate: 0deg; }
+  to   { rotate: -360deg; }
+}
+
+/* Inner ring: fluid sine-like breathing, 1.0 → 1.20 (20 % amplitude).
+   No hold pauses — 0%/50%/100% creates a seamless loop where the user
+   cannot identify start or end of the cycle. */
+@keyframes ring-breathe-inner {
+  0%, 100% { scale: 1; }
+  50%       { scale: 1.20; }
+}
+
+/* Outer ring: 1.0 → 1.32 (32 % amplitude). Wider excursion than inner so the
+   gap between the two rings visibly opens and closes with each breath.
+   Opacity rises with the expansion: nearly invisible at rest (0.32),
+   clearly present at peak (0.90). 4.8 s duration (≠ inner 4.5 s) keeps
+   them from locking into perfect unison — more organic, wave-like feel. */
+@keyframes ring-breathe-outer {
+  0%, 100% { scale: 1;    opacity: 0.32; }
+  50%       { scale: 1.32; opacity: 0.90; }
+}
+
+/* Orb close particles: drift up and fade */
+@keyframes particle-drift {
+  0%, 100% { opacity: 0;    transform: translateY(0)    scale(0.7); }
+  25%      { opacity: 0.32; transform: translateY(-6px)  scale(1);  }
+  65%      { opacity: 0.14; transform: translateY(3px)   scale(0.9); }
+  82%      { opacity: 0.24; }
+}
+
+/* Background dust: slow float, barely visible */
+@keyframes bg-drift {
+  0%   { opacity: 0;    transform: translateY(0); }
+  20%  { opacity: 0.14; }
+  50%  { opacity: 0.11; transform: translateY(-14px); }
+  80%  { opacity: 0.14; }
+  100% { opacity: 0;    transform: translateY(0); }
+}
