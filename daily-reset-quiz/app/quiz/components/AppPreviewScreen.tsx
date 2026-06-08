@@ -402,14 +402,36 @@ export default function AppPreviewScreen({ variation }: AppPreviewScreenProps) {
           {preCTA}
         </p>
 
+        {/* ── Depoimentos ────────────────────────────────────────────────── */}
+        <div className="flex flex-col gap-4">
+          {[
+            { quote: 'Não resolveu todos os meus problemas. Mas me ajudou a sair do automático mais vezes do que eu imaginava.', name: 'Mariana' },
+            { quote: 'Achei que fosse usar por alguns dias e esquecer. Acabou virando o momento do dia em que eu consigo parar um pouco.', name: 'Renata' },
+          ].map(({ quote, name }) => (
+            <div key={name} className="bg-white border border-[#F0EBE3] rounded-2xl p-5 flex flex-col gap-3">
+              <p className="text-[#1A1A1A] text-sm leading-relaxed italic">"{quote}"</p>
+              <div className="flex items-center gap-2">
+                <span className="text-[#C9A84C] text-sm tracking-wide">★★★★★</span>
+                <span className="text-[#6B6B6B] text-sm">— {name}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* ── Âncora de preço ────────────────────────────────────────────── */}
         <div className="flex flex-col items-center gap-1.5 border-t border-[#F0EBE3] pt-6">
           <p className="text-[#1A1A1A] text-base font-semibold text-center">
             R$29,90 por mês.
           </p>
-          <p className="text-[#6B6B6B] text-sm text-center leading-relaxed">
-            Se não fizer sentido nos primeiros 7 dias, devolvemos tudo.
-          </p>
+          <div className="flex items-center gap-1.5 justify-center">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="shrink-0">
+              <path d="M7 1.5L2 4V8C2 10.5 4.2 12.8 7 13.5C9.8 12.8 12 10.5 12 8V4L7 1.5Z" fill="#C9A84C"/>
+              <path d="M5 7.2L6.4 8.6L9.2 5.5" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <p className="text-[#6B6B6B] text-sm leading-relaxed">
+              Se não fizer sentido nos primeiros 7 dias, devolvemos tudo.
+            </p>
+          </div>
           <p className="text-[#6B6B6B] text-sm text-center">
             Cancele quando quiser.
           </p>
