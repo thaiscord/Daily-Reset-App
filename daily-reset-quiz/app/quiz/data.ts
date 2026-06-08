@@ -47,13 +47,13 @@ export const questions: QuizQuestion[] = [
   },
   {
     id: 5,
-    text: 'Quando você percebe que não está bem, o que costuma aparecer primeiro?',
+    text: 'Como você costuma se sentir no meio de um dia comum?',
     options: [
-      { text: 'A cabeça não para — fico no modo de resolver mesmo quando não precisava', scores: { P: 2 } },
-      { text: 'Começo a funcionar no automático — presente em tudo, ausente de mim', scores: { D: 2 } },
-      { text: 'Minha energia vai caindo — começo bem e não aguento', scores: { V: 2 } },
-      { text: 'Fico entre dias que aguento e dias que desabo', scores: { P: 1, V: 1 } },
-      { text: 'O dia acontece, mas parece que só passei por ele', scores: { D: 1, V: 1 } },
+      { text: 'Sobrecarregado — como se nunca pudesse parar', scores: { P: 2 } },
+      { text: 'Presente no corpo, ausente da cabeça', scores: { D: 2 } },
+      { text: 'Com menos energia do que precisaria ter', scores: { V: 2 } },
+      { text: 'Oscilando — às vezes aguento, às vezes não', scores: { P: 1, V: 1 } },
+      { text: 'Fazendo tudo, mas sem estar de verdade em nenhum lugar', scores: { D: 1, V: 1 } },
     ],
   },
   {
