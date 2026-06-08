@@ -47,13 +47,13 @@ export const questions: QuizQuestion[] = [
   },
   {
     id: 5,
-    text: 'Como é um dia típico seu?',
+    text: 'Quando você percebe que não está bem, o que costuma aparecer primeiro?',
     options: [
-      { text: 'Cheio de demandas — mal consigo respirar', scores: { P: 2 } },
-      { text: 'Funciono no automático — faço tudo mas não estou presente', scores: { D: 2 } },
-      { text: 'Começo bem mas esgoto rápido', scores: { V: 2 } },
-      { text: 'Varia muito — tem dias bons e dias que desabo', scores: { P: 1, V: 1 } },
-      { text: 'Parece igual todo dia — sem variação, sem brilho', scores: { D: 1, V: 1 } },
+      { text: 'A cabeça não para — fico no modo de resolver mesmo quando não precisava', scores: { P: 2 } },
+      { text: 'Começo a funcionar no automático — presente em tudo, ausente de mim', scores: { D: 2 } },
+      { text: 'Minha energia vai caindo — começo bem e não aguento', scores: { V: 2 } },
+      { text: 'Fico entre dias que aguento e dias que desabo', scores: { P: 1, V: 1 } },
+      { text: 'O dia acontece, mas parece que só passei por ele', scores: { D: 1, V: 1 } },
     ],
   },
   {

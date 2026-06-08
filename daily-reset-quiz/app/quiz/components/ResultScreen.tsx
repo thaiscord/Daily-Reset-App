@@ -131,14 +131,6 @@ export default function ResultScreen({ variation, tag, onNext }: ResultScreenPro
           </p>
         </div>
 
-        <div className="flex flex-col gap-6 mt-3">
-          {essentialParagraphs[variation].map((paragraph, i) => (
-            <p key={i} className="text-[#1A1A1A] text-base leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
         <div className="flex flex-col items-center mt-3">
           <button
             type="button"
@@ -147,6 +139,14 @@ export default function ResultScreen({ variation, tag, onNext }: ResultScreenPro
           >
             {ctaText[variation]}
           </button>
+        </div>
+
+        <div className="flex flex-col gap-6 mt-3">
+          {essentialParagraphs[variation].map((paragraph, i) => (
+            <p key={i} className="text-[#1A1A1A] text-base leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
         </div>
 
         {/* — SEGUNDA DOBRA — */}

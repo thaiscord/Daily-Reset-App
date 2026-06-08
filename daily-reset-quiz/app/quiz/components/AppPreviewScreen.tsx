@@ -32,7 +32,7 @@ const introLines: Record<Variation, string[]> = {
   B: [
     'O que apareceu nas suas respostas não parece falta de disciplina.',
     'Parece mais alguém que continua seguindo em frente sem conseguir recuperar de verdade a energia que está gastando.',
-    'Foi pensando em pessoas que continuam seguindo em frente mesmo cansadas que o Daily Reset foi criado.',
+    'Às vezes o que falta não é esforço. É conseguir recuperar um pouco do que o esforço vai gastando.',
   ],
   C: [
     'O que você descreveu não parece falta de força de vontade.',
