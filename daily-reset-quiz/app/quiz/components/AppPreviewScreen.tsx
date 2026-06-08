@@ -402,6 +402,19 @@ export default function AppPreviewScreen({ variation }: AppPreviewScreenProps) {
           {preCTA}
         </p>
 
+        {/* ── Âncora de preço ────────────────────────────────────────────── */}
+        <div className="flex flex-col items-center gap-1.5 border-t border-[#F0EBE3] pt-6">
+          <p className="text-[#1A1A1A] text-base font-semibold text-center">
+            R$29,90 por mês.
+          </p>
+          <p className="text-[#6B6B6B] text-sm text-center leading-relaxed">
+            Se não fizer sentido nos primeiros 7 dias, devolvemos tudo.
+          </p>
+          <p className="text-[#6B6B6B] text-sm text-center">
+            Cancele quando quiser.
+          </p>
+        </div>
+
         {/* ── CTA ────────────────────────────────────────────────────────── */}
         <div className="flex flex-col items-center pb-8">
           <a
