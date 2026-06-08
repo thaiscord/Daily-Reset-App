@@ -90,6 +90,12 @@ const firstDaysClosing: Record<Variation, string[]> = {
   ],
 }
 
+const day7Text: Record<Variation, string> = {
+  A: 'Nos primeiros dias, pode parecer pouco para tudo que você carrega. Mas, por volta do sétimo, talvez você perceba que teve pelo menos um momento em que conseguiu parar de verdade.',
+  B: 'Nos primeiros dias, pode não parecer suficiente. Mas, por volta do sétimo, talvez você perceba que chegou ao fim da semana carregando um pouco menos do que esperava.',
+  C: 'Nos primeiros dias, pode parecer que nada muda. Mas, por volta do sétimo, talvez você perceba alguns momentos em que esteve realmente presente — e notou isso enquanto acontecia.',
+}
+
 const headlines: Record<Variation, string> = {
   A: 'Você já carregou coisa demais hoje.',
   B: 'Você não precisa merecer o descanso.',
@@ -132,6 +138,7 @@ export default function AppPreviewScreen({ variation }: AppPreviewScreenProps) {
   const firstDays   = firstDaysText[variation]
   const firstDaysTitle = firstDaysTitles[variation]
   const firstDaysClose = firstDaysClosing[variation]
+  const day7           = day7Text[variation]
 
   // ── Lightbox React state (open/close lifecycle + animation) ─────────────
   const [lbOpen,    setLbOpen]    = useState(false)
@@ -396,6 +403,11 @@ export default function AppPreviewScreen({ variation }: AppPreviewScreenProps) {
             </div>
           )}
         </div>
+
+        {/* ── Dia 7 ──────────────────────────────────────────────────────── */}
+        <p className="text-[#6B6B6B] text-sm text-center leading-relaxed italic">
+          {day7}
+        </p>
 
         {/* ── Transição pré-CTA ──────────────────────────────────────────── */}
         <p className="text-[#6B6B6B] text-sm text-center leading-relaxed italic">
