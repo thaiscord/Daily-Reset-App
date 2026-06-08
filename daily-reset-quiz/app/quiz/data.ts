@@ -36,13 +36,13 @@ export const questions: QuizQuestion[] = [
   },
   {
     id: 4,
-    text: 'Você já tentou algum app de bem-estar ou meditação?',
-    isTagQuestion: true,
+    text: 'O que você sente mais falta ultimamente?',
     options: [
-      { text: 'Sim, mas abandonei rápido', tag: 'tentou' },
-      { text: 'Sim, uso até hoje mas sinto que falta algo', tag: 'usa' },
-      { text: 'Nunca tentei', tag: 'nunca' },
-      { text: 'Tentei mas não era pra mim', tag: 'tentou' },
+      { text: 'Acordar sem já me sentir cansado', scores: { V: 2 } },
+      { text: 'Ter tempo para ouvir a mim mesmo', scores: { P: 1, D: 1 } },
+      { text: 'Me sentir animado com alguma coisa', scores: { V: 1, D: 1 } },
+      { text: 'Saber para onde estou indo', scores: { D: 2 } },
+      { text: 'Sentir que ainda sou eu', scores: { D: 2 } },
     ],
   },
   {

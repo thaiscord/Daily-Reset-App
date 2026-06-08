@@ -16,7 +16,7 @@ import disconnectionImg5 from '../../../Assets/Results/disconnection-5min.png.pn
 
 interface AppPreviewScreenProps { variation: Variation }
 
-const SIGNUP_URL = 'https://seuapp.com/cadastro'
+const SIGNUP_URL = 'https://pay.cakto.com.br/7ujagvn_918698'
 
 const cardImages: Record<Variation, [StaticImageData, StaticImageData, StaticImageData]> = {
   A: [pressureImg1,    pressureImg2,    pressureImg5],
@@ -26,9 +26,8 @@ const cardImages: Record<Variation, [StaticImageData, StaticImageData, StaticIma
 
 const introLines: Record<Variation, string[]> = {
   A: [
-    'O que você descreveu não parece falta de esforço.',
-    'Parece que sua atenção ficou ocupada por tantas demandas ao mesmo tempo que quase não sobrou espaço para você.',
-    'Foi pensando em dias assim que o Daily Reset foi criado.',
+    'O Daily Reset foi pensado para isso — não para resolver tudo, mas para criar alguns minutos seus nos dias que mais pesam.',
+    'São poucos minutos. Mas são seus.',
   ],
   B: [
     'O que apareceu nas suas respostas não parece falta de disciplina.',
@@ -38,14 +37,69 @@ const introLines: Record<Variation, string[]> = {
   C: [
     'O que você descreveu não parece falta de força de vontade.',
     'Parece que você passou tanto tempo funcionando no automático que começou a perder contato com o que sente.',
-    'Foi pensando em momentos em que a gente perde contato com si mesmo que o Daily Reset foi criado.',
+    'E é justamente para momentos assim que o Daily Reset existe.',
+    'Não para trazer respostas.',
+    'Mas para criar alguns minutos em que você possa voltar a se escutar.',
   ],
 }
 
 const cardSubtitles: Record<Variation, [string, string, string]> = {
-  A: ['Aliviar a pressão por alguns instantes.',   'Organizar o que está ocupando sua mente.',         'Recuperar espaço no meio das demandas.'],
-  B: ['Diminuir a sensação de exaustão.',           'Criar um momento real de recuperação.',             'Voltar ao dia com mais energia.'],
-  C: ['Voltar para o momento presente.',            'Reconectar com o que você está sentindo.',          'Recuperar presença no seu próprio dia.'],
+  A: ['Respirar antes de resolver mais uma coisa.',   'Existir por alguns minutos sem precisar resolver nada.',   'Sair do modo de resolver por alguns minutos.'],
+  B: ['Parar de empurrar o corpo por mais um minuto.',  'Descansar sem precisar merecer isso.',              'Ouvir o que o cansaço está tentando dizer.'],
+  C: ['Sair do automático por um instante.',         'Ouvir o que você não tem parado para ouvir.',      'Voltar a sentir que viveu o dia, não apenas cumpriu.'],
+}
+
+const preCTALines: Record<Variation, string> = {
+  A: 'Se hoje pareceu que não havia espaço para parar, talvez esse seja um bom lugar para começar.',
+  B: 'Se você está cansado de continuar sem conseguir se recuperar, talvez seja hora de tentar algo diferente.',
+  C: 'Se você sente falta de se sentir presente, esse pode ser um primeiro passo de volta.',
+}
+
+const firstDaysText: Record<Variation, string[]> = {
+  A: [
+    'Nos primeiros dias, parar pode parecer estranho.',
+    'É normal.',
+    'Quem continua costuma perceber, em algum momento da primeira semana, que chegou ao dia de um jeito diferente.',
+  ],
+  B: [
+    'Não muda tudo de uma vez.',
+    'Mas muitas pessoas começam a perceber, durante a primeira semana, que estão carregando um pouco menos do que antes.',
+  ],
+  C: [
+    'Normalmente não é a energia.',
+    'Não é a motivação.',
+    'Nem a vontade de fazer grandes mudanças.',
+    'O que costuma voltar primeiro é algo menor:',
+    'a sensação de estar realmente dentro do próprio dia.',
+  ],
+}
+
+const firstDaysTitles: Record<Variation, string> = {
+  A: 'O que costuma acontecer nos primeiros dias',
+  B: 'O que costuma acontecer nos primeiros dias',
+  C: 'O que costuma mudar primeiro',
+}
+
+const firstDaysClosing: Record<Variation, string[]> = {
+  A: [],
+  B: [],
+  C: [
+    'Às vezes por um minuto.',
+    'Às vezes por cinco.',
+    'Mas já é diferente de apenas passar por ele.',
+  ],
+}
+
+const headlines: Record<Variation, string> = {
+  A: 'Você já carregou coisa demais hoje.',
+  B: 'Você não precisa merecer o descanso.',
+  C: 'Você esteve presente para todo mundo. Menos para você.',
+}
+
+const finalCTA: Record<Variation, string> = {
+  A: 'Criar meu espaço para parar →',
+  B: 'Quero começar a descansar →',
+  C: 'Quero voltar a me escutar →',
 }
 
 const cardTimes = ['1 minuto', '2 minutos', '5 minutos'] as const
@@ -70,9 +124,14 @@ function getTouchDist(t: React.TouchList) {
 
 // ── Component ────────────────────────────────────────────────────────────────
 export default function AppPreviewScreen({ variation }: AppPreviewScreenProps) {
-  const intro     = introLines[variation]
-  const subtitles = cardSubtitles[variation]
-  const images    = cardImages[variation]
+  const headline    = headlines[variation]
+  const intro       = introLines[variation]
+  const subtitles   = cardSubtitles[variation]
+  const images      = cardImages[variation]
+  const preCTA      = preCTALines[variation]
+  const firstDays   = firstDaysText[variation]
+  const firstDaysTitle = firstDaysTitles[variation]
+  const firstDaysClose = firstDaysClosing[variation]
 
   // ── Lightbox React state (open/close lifecycle + animation) ─────────────
   const [lbOpen,    setLbOpen]    = useState(false)
@@ -251,17 +310,28 @@ export default function AppPreviewScreen({ variation }: AppPreviewScreenProps) {
       <div className="max-w-lg mx-auto flex flex-col gap-8">
 
         <h2 className="text-[#1A1A1A] text-2xl font-bold text-center leading-snug">
-          Como o Daily Reset funciona na prática
+          {headline}
         </h2>
 
         <p className="text-[#6B6B6B] text-base text-center leading-relaxed">
-          Não é mais um app de meditação. É um espaço que responde a como você está — todo dia.
+          Às vezes o que ajuda não é grande. É só ter um lugar para ir.
         </p>
 
         <div className="flex flex-col gap-3">
-          <p className="text-[#1A1A1A] text-base leading-relaxed text-center">{intro[0]}</p>
-          <p className="text-[#1A1A1A] text-base leading-relaxed text-center">{intro[1]}</p>
-          <p className="text-[#6B6B6B] italic text-base leading-relaxed text-center">{intro[2]}</p>
+          {intro.slice(0, -1).map((line, i) => (
+            <p key={i} className="text-[#1A1A1A] text-base leading-relaxed text-center">{line}</p>
+          ))}
+          <p className="text-[#6B6B6B] italic text-base leading-relaxed text-center">{intro[intro.length - 1]}</p>
+        </div>
+
+        {/* ── Ritual diário ──────────────────────────────────────────────── */}
+        <div className="flex flex-col gap-1 text-center">
+          <p className="text-[#6B6B6B] text-sm leading-relaxed">
+            Cada dia, você escolhe quanto tempo tem.
+          </p>
+          <p className="text-[#8A8A8A] text-sm italic leading-relaxed">
+            Um minuto ou cinco — o que importa é que é seu.
+          </p>
         </div>
 
         {/* ── Cards ──────────────────────────────────────────────────────── */}
@@ -304,15 +374,42 @@ export default function AppPreviewScreen({ variation }: AppPreviewScreenProps) {
           ))}
         </div>
 
+        {/* ── Primeiros dias ─────────────────────────────────────────────── */}
+        <div className="flex flex-col gap-4 pt-2 border-t border-[#F0EBE3]">
+          <p className="text-[#8A8A8A] text-sm text-center font-medium">
+            {firstDaysTitle}
+          </p>
+          <div className="flex flex-col gap-3">
+            {firstDays.map((paragraph, i) => (
+              <p key={i} className="text-[#1A1A1A] text-base leading-relaxed text-center">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          {firstDaysClose.length > 0 && (
+            <div className="flex flex-col gap-2 mt-1">
+              {firstDaysClose.map((line, i) => (
+                <p key={i} className="text-[#6B6B6B] text-sm italic text-center leading-relaxed">
+                  {line}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* ── Transição pré-CTA ──────────────────────────────────────────── */}
+        <p className="text-[#6B6B6B] text-sm text-center leading-relaxed italic">
+          {preCTA}
+        </p>
+
         {/* ── CTA ────────────────────────────────────────────────────────── */}
-        <div className="flex flex-col items-center gap-3 pb-8">
+        <div className="flex flex-col items-center pb-8">
           <a
             href={SIGNUP_URL}
             className="bg-[#C9A84C] text-white font-semibold text-base px-8 py-4 rounded-full w-full max-w-[400px] text-center hover:bg-[#b8953d] transition-colors duration-200"
           >
-            Começar agora — 7 dias grátis →
+            {finalCTA[variation]}
           </a>
-          <p className="text-[#6B6B6B] text-sm text-center">Sem cartão de crédito. Cancela quando quiser.</p>
         </div>
 
       </div>

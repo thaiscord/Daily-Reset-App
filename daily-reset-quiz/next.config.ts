@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  allowedDevOrigins: ['192.168.15.16'],
+  allowedDevOrigins: ['192.168.15.4'],
   devIndicators: false,
 };
 

@@ -16,14 +16,17 @@ export default function EntryScreen({ onStart }: EntryScreenProps) {
 
       <div className="entry-middle">
         <h1 className="entry-headline">
-          Você está cansado...<br />ou está desaparecendo aos poucos?
+          Você está cansado...<br />ou deixou de estar presente?
         </h1>
         <hr className="entry-accent" />
         <p className="entry-subtitle">
           Nem todo cansaço parece cansaço.
         </p>
+        <p className="entry-bridge">
+          Às vezes a gente continua seguindo em frente. Mas deixa de estar realmente presente.
+        </p>
         <p className="entry-subtitle-2">
-          São apenas 7 perguntas.
+          Em poucos minutos, você pode enxergar algo que passou despercebido.
         </p>
       </div>
 

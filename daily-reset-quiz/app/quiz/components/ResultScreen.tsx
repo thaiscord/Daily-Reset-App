@@ -22,16 +22,16 @@ const bridgeText: Record<Variation, string> = {
 }
 
 const headline: Record<Variation, string> = {
-  A: 'Ultimamente tem sobrado pouco espaço para você.',
+  A: 'Você resolve tudo. Menos o cansaço que acumula.',
   B: 'O descanso acontece. A recuperação, não.',
-  C: 'Você está se afastando de si mesmo.',
+  C: 'Você está aqui. Mas não inteiramente.',
 }
 
 // Linha de abertura logo abaixo do headline — variação A tem nova voz
 const subtitleText: Record<Variation, string> = {
   A: 'E provavelmente não foi de uma hora para outra.',
   B: 'Você está cumprindo tudo. Mas nada está recarregando.',
-  C: 'Você está funcionando. Mas não está presente.',
+  C: 'E talvez nem tenha percebido quando isso começou.',
 }
 
 const reframe: Record<Variation, string> = {
@@ -43,15 +43,20 @@ const reframe: Record<Variation, string> = {
 const essentialParagraphs: Record<Variation, string[]> = {
   A: [
     'Talvez o mais cansativo não seja uma única coisa. Talvez seja nunca conseguir sair completamente do modo de resolver.',
-    'Esse tipo de cansaço raramente avisa com clareza. Aparece em coisas pequenas.',
+    'Esse tipo de cansaço raramente avisa com clareza. Ele aparece quando parar por cinco minutos começa a parecer impossível.',
   ],
   B: [
     'Você dorme. Às vezes até bastante. Mas acorda igual.',
     'Tem coisas que antes te davam alguma coisa. Agora só custam.',
   ],
   C: [
-    "Não tem um motivo claro. Se alguém perguntasse, você provavelmente diria que está 'ok'.",
-    'Mas tem algo que sumiu: uma leveza, uma presença, uma sensação de estar de verdade no que você está fazendo.',
+    'Você continua aparecendo para tudo.',
+    'Mas nem sempre parece estar realmente lá.',
+    'Algumas coisas ainda acontecem.',
+    'Mas já não chegam até você do mesmo jeito.',
+    'E talvez seja justamente por isso que passou despercebido.',
+    'Porque nada parece errado.',
+    'Só parece distante.',
   ],
 }
 
@@ -71,8 +76,8 @@ const extendedParagraphs: Record<Variation, string[]> = {
 }
 
 const ctaText: Record<Variation, string> = {
-  A: 'Quero abrir um pouco de espaço →',
-  B: 'Quero recuperar minha energia →',
+  A: 'Quero sair do modo de resolver →',
+  B: 'Quero sentir que descansei →',
   C: 'Quero me sentir presente de novo →',
 }
 
@@ -80,7 +85,7 @@ const ctaText: Record<Variation, string> = {
 const contextNote: Record<Variation, string | null> = {
   A: 'Lendo tudo isso junto, não parece uma questão de esforço.',
   B: 'Talvez você tenha se acostumado a sentir isso.',
-  C: null,
+  C: 'Com o tempo, isso começa a parecer normal.',
 }
 
 const transitionText: Record<Variation, string> = {
@@ -166,10 +171,20 @@ export default function ResultScreen({ variation, tag, onNext }: ResultScreenPro
           {transitionText[variation]}
         </p>
 
-        <div className="bg-[#EDE8DC] rounded-2xl p-5 mb-8">
+        <div className="bg-[#EDE8DC] rounded-2xl p-5">
           <p className="text-[#505050] italic text-sm leading-relaxed">
             {tagText[tag]}
           </p>
+        </div>
+
+        <div className="flex flex-col items-center pb-8">
+          <button
+            type="button"
+            onClick={onNext}
+            className="bg-[#C9A84C] text-white font-semibold text-base px-8 py-3.5 rounded-full w-full max-w-[400px] hover:bg-[#b8953d] transition-colors duration-200 cursor-pointer"
+          >
+            {ctaText[variation]}
+          </button>
         </div>
 
       </div>
